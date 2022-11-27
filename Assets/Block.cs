@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -30,9 +31,8 @@ public class Block : MonoBehaviour
         float TopLeftJ = -0.08f * GamePlayControll.instance.width;
         float posX = transform.position.x;
         float posY = transform.position.y;
-        int indexI = (int)((TopLeftI - posY) / 0.16f);
-        int indexJ = (int)((posX + TopLeftJ) / 0.16f);
-
+        int indexI = Mathf.RoundToInt((TopLeftI - posY) / 0.16f);
+        int indexJ = Mathf.RoundToInt((posX - TopLeftJ) / 0.16f);
         GamePlayControll.instance.ClickOn(indexI, indexJ);
         gameObject.SetActive(false);
     }

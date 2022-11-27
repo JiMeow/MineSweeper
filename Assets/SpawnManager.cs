@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
         //shulffle test
         for (int i = 0; i < width * height; i++)
         {
-            int newIndex = Random.Range(0, 100);
+            int newIndex = Random.Range(0, width * height);
             int temp = test[i];
             test[i] = test[newIndex];
             test[newIndex] = temp;
@@ -94,7 +94,7 @@ public class SpawnManager : MonoBehaviour
                     {
                         if (k == 0 & j == 0)
                             continue;
-                        if (i + k < 0 || i + k >= height || j + l < 0 || j + l >= width)
+                        if (i + k < 0 | i + k >= height | j + l < 0 | j + l >= width)
                             continue;
                         if (isBombTable[i + k, j + l] == 1)
                             count++;

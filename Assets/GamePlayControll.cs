@@ -80,7 +80,8 @@ public class GamePlayControll : MonoBehaviour
 
     void Dfs(int i, int j, int[,] visit)
     {
-        if (i < 0 || i >= height || j < 0 || j >= width)
+        Debug.Log(i + " " + j);
+        if (i < 0 | i >= height | j < 0 | j >= width)
         {
             return;
         }
