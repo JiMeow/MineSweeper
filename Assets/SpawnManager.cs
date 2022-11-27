@@ -5,17 +5,24 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public int[,] table;
+    int[,] isBombTable;
     public GameObject[,] tableGameObjects;
     public GameObject[,] playTable;
-    int[,] isBombTable;
+
     SpawnResources spwanGameObjectsResource;
+    int height;
+    int width;
     void Start()
     {
+        height = GamePlayControll.instance.height;
+        width = GamePlayControll.instance.width;
         spwanGameObjectsResource = GetComponent<SpawnResources>();
-        table = new int[10, 10];
-        isBombTable = new int[10, 10];
-        tableGameObjects = new GameObject[10, 10];
-        playTable = new GameObject[10, 10];
+
+        table = new int[height, width];
+        isBombTable = new int[height, width];
+        tableGameObjects = new GameObject[height, width];
+        playTable = new GameObject[height, width];
+
         SelectBomb();
         SetTable();
         SpawmBomb();
@@ -23,18 +30,20 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawmBomb()
     {
-        for (int i = 0; i < 10; i++)
+        //real table
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < width; j++)
             {
                 GameObject bomb = spwanGameObjectsResource.SpawnBombGameObjects(table[i, j], i, j);
                 tableGameObjects[i, j] = bomb;
                 bomb.SetActive(false);
             }
         }
-        for (int i = 0; i < 10; i++)
+        //on click table
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < width; j++)
             {
                 GameObject bomb = spwanGameObjectsResource.SpawnBombGameObjects(0, i, j, scripts: true);
                 playTable[i, j] = bomb;
@@ -44,23 +53,23 @@ public class SpawnManager : MonoBehaviour
 
     private void SelectBomb()
     {
-        int[] test = new int[100];
-        for (int i = 0; i < 100; i++)
+        int[] test = new int[width * height];
+        for (int i = 0; i < width * height; i++)
         {
             test[i] = i;
         }
         //shulffle test
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < width * height; i++)
         {
             int newIndex = Random.Range(0, 100);
             int temp = test[i];
             test[i] = test[newIndex];
             test[newIndex] = temp;
         }
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < GamePlayControll.instance.bombCount; i++)
         {
-            int x = test[i] / 10;
-            int y = test[i] % 10;
+            int x = test[i] / width;
+            int y = test[i] % width;
             isBombTable[x, y] = 1;
         }
 
@@ -68,32 +77,29 @@ public class SpawnManager : MonoBehaviour
 
     private void SetTable()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < width; j++)
             {
                 if (isBombTable[i, j] == 1)
                 {
                     table[i, j] = -1;
                     continue;
                 }
+                //count bomb
                 int count = 0;
-                if (i > 0 && j > 0 && isBombTable[i - 1, j - 1] == 1)
-                    count++;
-                if (i > 0 && isBombTable[i - 1, j] == 1)
-                    count++;
-                if (i > 0 && j < 9 && isBombTable[i - 1, j + 1] == 1)
-                    count++;
-                if (j > 0 && isBombTable[i, j - 1] == 1)
-                    count++;
-                if (j < 9 && isBombTable[i, j + 1] == 1)
-                    count++;
-                if (i < 9 && j > 0 && isBombTable[i + 1, j - 1] == 1)
-                    count++;
-                if (i < 9 && isBombTable[i + 1, j] == 1)
-                    count++;
-                if (i < 9 && j < 9 && isBombTable[i + 1, j + 1] == 1)
-                    count++;
+                for (int k = -1; k <= 1; k++)
+                {
+                    for (int l = -1; l <= 1; l++)
+                    {
+                        if (k == 0 & j == 0)
+                            continue;
+                        if (i + k < 0 || i + k >= height || j + l < 0 || j + l >= width)
+                            continue;
+                        if (isBombTable[i + k, j + l] == 1)
+                            count++;
+                    }
+                }
                 table[i, j] = count;
             }
         }

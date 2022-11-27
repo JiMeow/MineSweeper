@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombClickOn : MonoBehaviour
+public class Block : MonoBehaviour
 {
     public bool isFlag;
     GameObject Flag;
@@ -26,10 +26,13 @@ public class BombClickOn : MonoBehaviour
     {
         if (isFlag)
             return;
+        float TopLeftI = 0.08f * GamePlayControll.instance.height;
+        float TopLeftJ = -0.08f * GamePlayControll.instance.width;
         float posX = transform.position.x;
         float posY = transform.position.y;
-        int indexI = (int)((0.8f - posY) / 0.16f);
-        int indexJ = (int)((posX + 0.8f) / 0.16f);
+        int indexI = (int)((TopLeftI - posY) / 0.16f);
+        int indexJ = (int)((posX + TopLeftJ) / 0.16f);
+
         GamePlayControll.instance.ClickOn(indexI, indexJ);
         gameObject.SetActive(false);
     }
@@ -42,6 +45,7 @@ public class BombClickOn : MonoBehaviour
                 return;
             isFlag = true;
             GamePlayControll.instance.flagLeft--;
+
             Vector3 pos = new Vector3(transform.position.x, transform.position.y, 0);
             GameObject tempFlag = Instantiate(Flag, pos, Quaternion.identity);
             tempFlag.transform.parent = transform;

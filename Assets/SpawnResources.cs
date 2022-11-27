@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SpawnResources : MonoBehaviour
 {
-    public float TopLeftI = 0.8f;
-    public float TopLeftJ = -0.8f;
+    float TopLeftI;
+    float TopLeftJ;
+    void Start()
+    {
+        TopLeftI = 0.08f * GamePlayControll.instance.height;
+        TopLeftJ = -0.08f * GamePlayControll.instance.width;
+    }
     public GameObject SpawnBombGameObjects(int bomb, int indexI, int indexJ, bool scripts = false)
     {
         string bombName;
-        if (bomb != -1)
-            bombName = "MineSweep" + bomb;
-        else
+        if (bomb == -1)
             bombName = "Bomb";
+        else
+            bombName = "MineSweep" + bomb;
 
         GameObject bombGameObject = Resources.Load(bombName) as GameObject;
         float posX = TopLeftJ + indexJ * 0.16f;
@@ -22,7 +27,7 @@ public class SpawnResources : MonoBehaviour
 
         if (scripts)
         {
-            newBomb.AddComponent<BombClickOn>();
+            newBomb.AddComponent<Block>();
             newBomb.AddComponent<BoxCollider2D>();
         }
         else if (bomb == 0)
