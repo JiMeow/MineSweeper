@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class BlockPlay : MonoBehaviour
 {
     public bool isFlag;
     GameObject Flag;
@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
         float posY = transform.position.y;
         int indexI = Mathf.RoundToInt((TopLeftI - posY) / 0.16f);
         int indexJ = Mathf.RoundToInt((posX - TopLeftJ) / 0.16f);
-        GamePlayControll.instance.ClickOn(indexI, indexJ);
+        GamePlayControll.instance.ClickOnPlay(indexI, indexJ);
         gameObject.SetActive(false);
     }
 

@@ -27,12 +27,17 @@ public class SpawnResources : MonoBehaviour
 
         if (scripts)
         {
-            newBomb.AddComponent<Block>();
+            newBomb.AddComponent<BlockPlay>();
             newBomb.AddComponent<BoxCollider2D>();
         }
         else if (bomb == 0)
         {
             newBomb.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            newBomb.AddComponent<BlockReal>();
+            newBomb.AddComponent<BoxCollider2D>();
         }
 
         return newBomb;

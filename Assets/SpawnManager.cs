@@ -92,9 +92,9 @@ public class SpawnManager : MonoBehaviour
                 {
                     for (int l = -1; l <= 1; l++)
                     {
-                        if (k == 0 & j == 0)
+                        if (k == 0 & l == 0)
                             continue;
-                        if (i + k < 0 | i + k >= height | j + l < 0 | j + l >= width)
+                        if (i + k < 0 || i + k >= height || j + l < 0 || j + l >= width)
                             continue;
                         if (isBombTable[i + k, j + l] == 1)
                             count++;
