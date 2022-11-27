@@ -45,7 +45,8 @@ public class EndGameManager : MonoBehaviour
     public void Win()
     {
         Time.timeScale = 0;
-        StartCoroutine(ChangeIsUpdate());
+        //StartCoroutine(ChangeIsUpdate());
+        UIManager.instance.Win();
     }
 
     IEnumerator ChangeIsUpdate()

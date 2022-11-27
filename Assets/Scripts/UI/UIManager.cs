@@ -5,24 +5,22 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
     GameObject winUi;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     private void Start()
     {
         winUi = GameObject.Find("WinUI");
         winUi.SetActive(false);
     }
-    void Update()
-    {
-        if (transform.name == "FlagLeft")
-        {
-            GetComponent<TextMeshProUGUI>().text = GamePlayControll.instance.flagLeft.ToString();
-        }
-        else if (transform.name == "Time")
-        {
-            GetComponent<TextMeshProUGUI>().text = "Time: " + (int)Time.timeSinceLevelLoad;
-        }
-    }
-
     public void Win()
     {
         winUi.SetActive(true);
