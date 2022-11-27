@@ -40,12 +40,12 @@ public class EndGameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         StartCoroutine(ChangeIsUpdate());
+        UIManager.instance.Lose();
     }
 
     public void Win()
     {
         Time.timeScale = 0;
-        //StartCoroutine(ChangeIsUpdate());
         UIManager.instance.Win();
     }
 

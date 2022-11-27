@@ -25,6 +25,7 @@ public class GamePlayControll : MonoBehaviour
     {
         spawnManager = GetComponent<SpawnManager>();
         flagLeft = bombCount;
+        Time.timeScale = 1;
     }
 
     private void Update()

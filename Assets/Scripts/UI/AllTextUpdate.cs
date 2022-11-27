@@ -15,5 +15,18 @@ public class AllTextUpdate : MonoBehaviour
         {
             GetComponent<TextMeshProUGUI>().text = "Time: " + (int)Time.timeSinceLevelLoad;
         }
+        else if (transform.name == "BestTime")
+        {
+            string bestPlayer = PlayerPrefs.GetString("highScore", "");
+            if (bestPlayer == "")
+            {
+                GetComponent<TextMeshProUGUI>().text = "Best Time: " + "_";
+            }
+            else
+            {
+                float bestTime = PlayerPrefs.GetFloat(bestPlayer);
+                GetComponent<TextMeshProUGUI>().text = "Best Time: " + (int)bestTime + " seconds (" + bestPlayer + ")";
+            }
+        }
     }
 }
