@@ -44,7 +44,7 @@ public class GamePlayControll : MonoBehaviour
         spawnManager.playTable[indexI, indexJ].SetActive(false);
         spawnManager.tableGameObjects[indexI, indexJ].SetActive(true);
         if (spawnManager.table[indexI, indexJ] == -1)
-            DeadManager.instance.Dead();
+            EndGameManager.instance.Dead();
     }
     void DfsPlay(int i, int j, int[,] visit)
     {
@@ -95,7 +95,7 @@ public class GamePlayControll : MonoBehaviour
                         count++;
 
             if (count == bombCount)
-                DeadManager.instance.Win();
+                EndGameManager.instance.Win();
         }
     }
 

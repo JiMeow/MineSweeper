@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeadManager : MonoBehaviour
+public class EndGameManager : MonoBehaviour
 {
-    public static DeadManager instance;
+    public static EndGameManager instance;
     bool isUpdate;
     void Awake()
     {
