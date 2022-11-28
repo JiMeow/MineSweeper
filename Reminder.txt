@@ -1,0 +1,5 @@
+mainmenu -> score serch, play, setting, credit, exit
+setting
+sound
+need scoreboard search in menu (show best score by input name)
+need back to mainmenu button

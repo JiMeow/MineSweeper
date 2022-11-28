@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class EndGameManager : MonoBehaviour
 {
     public static EndGameManager instance;
+
+    SpawnManager spawnManager;
     bool isUpdate;
+
     void Awake()
     {
         if (instance == null)
@@ -22,6 +25,7 @@ public class EndGameManager : MonoBehaviour
     void Start()
     {
         isUpdate = false;
+        spawnManager = GetComponent<SpawnManager>();
     }
 
     private void Update()
@@ -39,8 +43,7 @@ public class EndGameManager : MonoBehaviour
     public void Dead()
     {
         Time.timeScale = 0;
-        StartCoroutine(ChangeIsUpdate());
-        UIManager.instance.Lose();
+        StartCoroutine(BombBomb());
     }
 
     public void Win()
@@ -53,5 +56,41 @@ public class EndGameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.1f);
         isUpdate = true;
+    }
+
+    IEnumerator BombBomb()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        foreach (GameObject playTable in spawnManager.playTable)
+        {
+            playTable.SetActive(false);
+        }
+        foreach (GameObject block in spawnManager.tableGameObjects)
+        {
+            block.SetActive(true);
+        }
+        yield return new WaitForSecondsRealtime(0.75f);
+        foreach (GameObject block in spawnManager.tableGameObjects)
+        {
+            if (block.transform.name == "Bomb(Clone)")
+            {
+                block.SetActive(true);
+                block.transform.GetChild(0).gameObject.SetActive(false);
+                block.transform.GetChild(1).gameObject.SetActive(true);
+            }
+        }
+        yield return new WaitForSecondsRealtime(0.75f);
+        foreach (GameObject block in spawnManager.tableGameObjects)
+        {
+            if (block.transform.name == "Bomb(Clone)")
+            {
+                block.SetActive(true);
+                block.transform.GetChild(1).gameObject.SetActive(false);
+                block.transform.GetChild(2).gameObject.SetActive(true);
+            }
+        }
+        yield return new WaitForSecondsRealtime(0.75f);
+        StartCoroutine(ChangeIsUpdate());
+        UIManager.instance.Lose();
     }
 }
