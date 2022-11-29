@@ -44,7 +44,7 @@ public class MenuButtonManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         if (sceneName == "Credit")
         {
-            Application.OpenURL("https://www.facebook.com/PhamMinhTuan.1999");
+            Application.OpenURL("https://github.com/JiMeow/MineSweeper");
         }
         else
         {
