@@ -33,6 +33,7 @@ public class BlockReal : MonoBehaviour
         float posY = transform.position.y;
         int indexI = Mathf.RoundToInt((TopLeftI - posY) / 0.16f);
         int indexJ = Mathf.RoundToInt((posX - TopLeftJ) / 0.16f);
+        SoundManager.instance.PlayClickSound();
         GamePlayControll.instance.ClickOnReal(indexI, indexJ);
     }
 }

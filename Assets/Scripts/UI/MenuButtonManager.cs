@@ -5,33 +5,51 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtonManager : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    public void PlayGame()
+    {
+        SoundManager.instance.PlayButtonClickSound();
+        StartCoroutine(ChangeScene("Game"));
+    }
+
     public void BackToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SoundManager.instance.PlayButtonClickSound();
+        StartCoroutine(ChangeScene("Menu"));
     }
 
     public void Credit()
     {
-        Application.OpenURL("https://github.com/JiMeow/MineSweeper");
+        SoundManager.instance.PlayButtonClickSound();
+        StartCoroutine(ChangeScene("Credit"));
     }
 
     public void Setting()
     {
-        SceneManager.LoadScene("Setting");
+        SoundManager.instance.PlayButtonClickSound();
+        StartCoroutine(ChangeScene("Setting"));
     }
 
     public void Scoreboard()
     {
-        SceneManager.LoadScene("Scoreboard");
+        SoundManager.instance.PlayButtonClickSound();
+        StartCoroutine(ChangeScene("Scoreboard"));
     }
+    IEnumerator ChangeScene(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        if (sceneName == "Credit")
+        {
+            Application.OpenURL("https://www.facebook.com/PhamMinhTuan.1999");
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+    }
+
 }

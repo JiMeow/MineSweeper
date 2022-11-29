@@ -33,12 +33,14 @@ public class BlockPlay : MonoBehaviour
         float posY = transform.position.y;
         int indexI = Mathf.RoundToInt((TopLeftI - posY) / 0.16f);
         int indexJ = Mathf.RoundToInt((posX - TopLeftJ) / 0.16f);
+        SoundManager.instance.PlayClickSound();
         GamePlayControll.instance.ClickOnPlay(indexI, indexJ);
         gameObject.SetActive(false);
     }
 
     void OnMouseDownRight()
     {
+        SoundManager.instance.PlayClickSound();
         if (!isFlag)
         {
             if (GamePlayControll.instance.flagLeft <= 0)

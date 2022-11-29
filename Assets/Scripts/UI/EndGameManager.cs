@@ -49,6 +49,7 @@ public class EndGameManager : MonoBehaviour
     public void Win()
     {
         Time.timeScale = 0;
+        SoundManager.instance.PlayWinSound();
         UIManager.instance.Win();
     }
 
@@ -61,6 +62,7 @@ public class EndGameManager : MonoBehaviour
     IEnumerator BombBomb()
     {
         yield return new WaitForSecondsRealtime(0.5f);
+        SoundManager.instance.PlayLoseSound();
         foreach (GameObject playTable in spawnManager.playTable)
         {
             playTable.SetActive(false);
@@ -70,6 +72,7 @@ public class EndGameManager : MonoBehaviour
             block.SetActive(true);
         }
         yield return new WaitForSecondsRealtime(0.5f);
+        SoundManager.instance.PlayLoseSound();
         foreach (GameObject block in spawnManager.tableGameObjects)
         {
             if (block.transform.name == "Bomb(Clone)")
@@ -80,6 +83,7 @@ public class EndGameManager : MonoBehaviour
             }
         }
         yield return new WaitForSecondsRealtime(0.5f);
+        SoundManager.instance.PlayLoseSound();
         foreach (GameObject block in spawnManager.tableGameObjects)
         {
             if (block.transform.name == "Bomb(Clone)")
