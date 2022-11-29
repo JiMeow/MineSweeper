@@ -69,7 +69,7 @@ public class EndGameManager : MonoBehaviour
         {
             block.SetActive(true);
         }
-        yield return new WaitForSecondsRealtime(0.75f);
+        yield return new WaitForSecondsRealtime(0.5f);
         foreach (GameObject block in spawnManager.tableGameObjects)
         {
             if (block.transform.name == "Bomb(Clone)")
@@ -79,7 +79,7 @@ public class EndGameManager : MonoBehaviour
                 block.transform.GetChild(1).gameObject.SetActive(true);
             }
         }
-        yield return new WaitForSecondsRealtime(0.75f);
+        yield return new WaitForSecondsRealtime(0.5f);
         foreach (GameObject block in spawnManager.tableGameObjects)
         {
             if (block.transform.name == "Bomb(Clone)")
@@ -89,7 +89,7 @@ public class EndGameManager : MonoBehaviour
                 block.transform.GetChild(2).gameObject.SetActive(true);
             }
         }
-        yield return new WaitForSecondsRealtime(0.75f);
+        yield return new WaitForSecondsRealtime(0.5f);
         StartCoroutine(ChangeIsUpdate());
         UIManager.instance.Lose();
     }
