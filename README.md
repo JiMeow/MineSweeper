@@ -12,3 +12,5 @@ Sound Credits:
 - background Sound | [Vidal OST](https://www.youtube.com/watch?v=oTP5aFtTFDY)
 
 - sound effect | [AlexeyNekrasov](https://www.sounds-resource.com/pc_computer/minesweeperwindows7/sound/36669/)
+
+**PS. not support ios, andriod webGL keyboard yet
