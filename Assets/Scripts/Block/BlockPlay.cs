@@ -6,10 +6,12 @@ using UnityEngine;
 public class BlockPlay : MonoBehaviour
 {
     public bool isFlag;
+    bool isClick;
     GameObject Flag;
     private void Start()
     {
         isFlag = false;
+        isClick = false;
         Flag = Resources.Load("Flag") as GameObject;
     }
 
@@ -18,9 +20,24 @@ public class BlockPlay : MonoBehaviour
         if (Time.timeScale == 0)
             return;
         if (Input.GetMouseButtonDown(0))
-            OnMouseDownLeft();
+            StartCoroutine(ClickOrHold());
         if (Input.GetMouseButtonDown(1))
             OnMouseDownRight();
+
+    }
+
+    IEnumerator ClickOrHold()
+    {
+        if (isClick)
+            yield break;
+
+        isClick = true;
+        yield return new WaitForSeconds(0.1f);
+        if (!Input.GetMouseButton(0))
+            OnMouseDownLeft();
+        else
+            OnMouseDownRight();
+        isClick = false;
     }
 
     void OnMouseDownLeft()
