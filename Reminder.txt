@@ -1,3 +1,1 @@
-setting scene -> setting sound (bg, click ), backto mainmenu
-scoreboard scene -> input text 
-need scoreboard search(show best score by input name)
+Complete

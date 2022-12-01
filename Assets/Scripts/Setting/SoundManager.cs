@@ -22,8 +22,8 @@ public class SoundManager : MonoBehaviour
     private float clickSoundVolume;
     private float buttonClickSoundVolume;
 
-    private float musicMul;
-    private float soundMul;
+    public float musicMul;
+    public float soundMul;
 
     private void Awake()
     {

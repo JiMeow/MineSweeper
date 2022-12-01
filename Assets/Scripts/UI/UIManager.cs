@@ -39,30 +39,23 @@ public class UIManager : MonoBehaviour
     public void SavePlayerData()
     {
         string name = InputFieldName.GetComponent<TMP_InputField>().text;
+        name = name.ToLower();
         if (name == "")
             name = "anonymous";
+
         float datatime = PlayerPrefs.GetFloat(name);
         if (datatime == 0)
             PlayerPrefs.SetFloat(name, Time.timeSinceLevelLoad);
-        else
-        {
-            if (datatime > Time.timeSinceLevelLoad)
-                PlayerPrefs.SetFloat(name, Time.timeSinceLevelLoad);
-        }
+        else if (datatime > Time.timeSinceLevelLoad)
+            PlayerPrefs.SetFloat(name, Time.timeSinceLevelLoad);
 
         string bestPlayer = PlayerPrefs.GetString("highScore", "");
+        float bestTime = PlayerPrefs.GetFloat(bestPlayer);
         if (bestPlayer == "")
-        {
             PlayerPrefs.SetString("highScore", name);
-        }
-        else
-        {
-            float bestTime = PlayerPrefs.GetFloat(bestPlayer);
-            if (bestTime > Time.timeSinceLevelLoad)
-            {
-                PlayerPrefs.SetString("highScore", name);
-            }
-        }
+        else if (bestTime > Time.timeSinceLevelLoad)
+            PlayerPrefs.SetString("highScore", name);
+
         RestartScene();
     }
 

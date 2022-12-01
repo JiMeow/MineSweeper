@@ -12,6 +12,8 @@ public class SoundSetting : MonoBehaviour
     {
         musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
         soundSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
+        musicSlider.value = SoundManager.instance.musicMul;
+        soundSlider.value = SoundManager.instance.soundMul;
     }
 
     public void SetMusic()
